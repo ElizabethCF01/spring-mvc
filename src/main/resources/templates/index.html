@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .product-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-title {
+            color: #2C3E50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-subtitle {
+            color: #7F8C8D;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2C3E50;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 2rem;
+            background: #f1f8ff;
+            border-radius: 12px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #2C3E50;
+        }
+        .form-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-title {
+            font-size: 1.4rem;
+            margin-top: 0;
+        }
+        input[type="email"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .has-error input {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-header">
+        <h1 class="product-title">TechSomething Newsletter</h1>
+        <p class="product-subtitle">Stay up to date with the latest trends in technology and software development</p>
+    </div>
+
+    <div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Web Development</h3>
+        <p class="feature-description">Learn about modern frameworks and best practices in web development.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3 class="feature-title">IA and Machine Learning</h3>
+        <p class="feature-description">Explore the latest innovations in artificial intelligence and machine learning.</p>
+    </div>
+</div>
+
+    <div class="cta-section">
+        <p class="cta-text">Ready to stay updated with the tech world?</p>
+        <p>Join over 10,000 developers who already receive our weekly updates.</p>
+    </div>
+    <!-- Success message-->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div class="form-container">
+        <p class="form-title">Enter your email to subscribe</p>
+        <!--/* @thymesVar id="userRequest" type="com.example.UserRequest" */-->
+        <form th:action="@{/subscribe}" th:object="${userRequest}" method="post">
+            <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
+                <label>
+                    <input type="email"
+                           th:field="*{email}"
+                           placeholder="Type your email"
+                           class="form-control"/>
+                </label>
+                <div class="error-message" th:if="${#fields.hasErrors('email')}">
+                    <span th:each="err : ${#fields.errors('email')}" th:text="${err}"></span>
+                </div>
+            </div>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+
+
+</body>
+</html>
+
