@@ -72,7 +72,7 @@ This application demonstrates the implementation of a Spring MVC architecture wi
 1. Clone the repository:
    ```bash
    git clone https://github.com/ElizabethCF01/spring-mvc.git
-   cd elizabethcf01-spring-mvc
+   cd spring-mvc
    ```
 2. Build the project:
    ```./mvnw clean package```
