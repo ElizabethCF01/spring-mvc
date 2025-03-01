@@ -1,6 +1,5 @@
 package com.example.spring_boot.repositories;
 
-import com.example.spring_boot.dto.MessageResponse;
 import com.example.spring_boot.dto.UserRequest;
 import com.example.spring_boot.model.UserModel;
 
