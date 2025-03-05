@@ -1,23 +1,29 @@
 package com.example.spring_boot.services;
 
 import com.example.spring_boot.dto.UserRequest;
-import com.example.spring_boot.repositories.IUserRepository;
+import com.example.spring_boot.model.UserModel;
+import com.example.spring_boot.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserManager {
-    private final IUserRepository _userRepository;
+    private final UserRepository _userRepository;
 
-    public UserManager(IUserRepository userRepository) {
+    public UserManager(UserRepository userRepository) {
         _userRepository = userRepository;
     }
 
-    public void saveUser(UserRequest user){
-        _userRepository.saveUser(user);
+    @Transactional
+    public void saveUser(UserRequest userRequest) {
+        UserModel user = new UserModel();
+        user.setEmail(userRequest.getEmail());
+        user.setIpAddress(userRequest.getIpAddress());
+        _userRepository.save(user);
     }
 
     public boolean emailExists(String email) {
-        return _userRepository.findByEmail(email).isPresent();
+        return _userRepository.existsByEmail(email);
     }
 
 }

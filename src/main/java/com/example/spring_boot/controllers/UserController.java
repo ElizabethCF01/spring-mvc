@@ -27,7 +27,6 @@ public class UserController {
     @GetMapping("/")
     public String showForm(Model model) {
         model.addAttribute("userRequest", new UserRequest());
-       
         return "index";
     }
 
