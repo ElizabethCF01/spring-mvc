@@ -21,43 +21,19 @@ This application demonstrates the implementation of a Spring MVC architecture wi
 ## Folder Structure
 ```
 └── elizabethcf01-spring-mvc/
-    ├── mvnw
-    ├── mvnw.cmd
-    ├── pom.xml
     ├── src/
-    │   ├── main/
-    │   │   ├── java/
-    │   │   │   └── com/
-    │   │   │       └── example/
-    │   │   │           └── spring_boot/
-    │   │   │               ├── Application.java
-    │   │   │               ├── controllers/
-    │   │   │               │   └── UserController.java
-    │   │   │               ├── dto/
-    │   │   │               │   ├── MessageResponse.java
-    │   │   │               │   └── UserRequest.java
-    │   │   │               ├── model/
-    │   │   │               │   └── UserModel.java
-    │   │   │               ├── repositories/
-    │   │   │               │   ├── IUserRepository.java
-    │   │   │               │   └── UserRepository.java
-    │   │   │               ├── services/
-    │   │   │               │   └── UserManager.java
-    │   │   │               └── util/
-    │   │   │                   └── IPAddressUtils.java
+    │   ├── main/java/com/example/spring_boot/
+    │   │   │   ├── Application.java
+    │   │   │   ├── controllers/
+    │   │   │   ├── dto/
+    │   │   │   ├── model/
+    │   │   │   ├── repositories/
+    │   │   │   ├── services/
+    │   │   │   └── util/
     │   │   └── resources/
-    │   │       ├── application.properties
     │   │       └── templates/
-    │   │           └── index.html
     │   └── test/
-    │       └── java/
-    │           └── com/
-    │               └── example/
-    │                   └── spring_boot/
-    │                       └── ApplicationTests.java
     └── .mvn/
-        └── wrapper/
-            └── maven-wrapper.properties
 ```
 
 
