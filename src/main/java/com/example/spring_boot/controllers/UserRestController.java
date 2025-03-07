@@ -1,6 +1,7 @@
 package com.example.spring_boot.controllers;
 
 import com.example.spring_boot.dto.UserRequest;
+import com.example.spring_boot.model.UserModel;
 import com.example.spring_boot.services.UserManager;
 import com.example.spring_boot.util.IPAddressUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,13 +9,11 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,5 +56,10 @@ public class UserRestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED) // 201 Created
                 .body(Collections.singletonMap("message", "Thank you for subscribing!"));
+    }
+
+    @GetMapping("/subscribers")
+    public List<UserModel> getSubscribers() {
+        return _userManager.getSubscribers();
     }
 }
