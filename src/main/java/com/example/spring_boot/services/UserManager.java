@@ -6,6 +6,8 @@ import com.example.spring_boot.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserManager {
     private final UserRepository _userRepository;
@@ -24,6 +26,9 @@ public class UserManager {
 
     public boolean emailExists(String email) {
         return _userRepository.existsByEmail(email);
+    }
+    public List<UserModel> getSubscribers() {
+        return _userRepository.findAll();
     }
 
 }
