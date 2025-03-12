@@ -1,7 +1,7 @@
 package com.example.spring_boot.controllers;
 
-import com.example.spring_boot.dto.UserRequest;
-import com.example.spring_boot.model.UserModel;
+import com.example.spring_boot.dtos.UserRequest;
+import com.example.spring_boot.models.UserModel;
 import com.example.spring_boot.services.UserManager;
 import com.example.spring_boot.util.IPAddressUtils;
 import jakarta.servlet.http.HttpServletRequest;

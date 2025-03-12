@@ -1,4 +1,4 @@
-package com.example.spring_boot.dto;
+package com.example.spring_boot.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

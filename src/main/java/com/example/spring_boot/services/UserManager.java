@@ -1,7 +1,7 @@
 package com.example.spring_boot.services;
 
-import com.example.spring_boot.dto.UserRequest;
-import com.example.spring_boot.model.UserModel;
+import com.example.spring_boot.dtos.UserRequest;
+import com.example.spring_boot.models.UserModel;
 import com.example.spring_boot.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

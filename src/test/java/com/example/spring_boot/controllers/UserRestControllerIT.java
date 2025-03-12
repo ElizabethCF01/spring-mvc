@@ -1,7 +1,6 @@
 package com.example.spring_boot.controllers;
 
-import com.example.spring_boot.dto.UserRequest;
-import com.example.spring_boot.services.UserManager;
+import com.example.spring_boot.dtos.UserRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
