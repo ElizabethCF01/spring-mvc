@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface GhRepositoryRepository  extends JpaRepository<GhRepository, Integer> {
 
     Optional<GhRepository> findByOwnerAndName(String owner, String name);
+    boolean existsByOwner(String name);
+    Optional<GhRepository> findByName(String name);
 }
