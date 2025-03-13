@@ -5,12 +5,13 @@ import com.example.spring_boot.models.GhRepository;
 import com.example.spring_boot.repositories.GhRepositoryRepository;
 import com.example.spring_boot.clients.GhClient;
 import feign.FeignException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,8 +48,8 @@ public class GhRepositoryManager {
         return _ghRepositoryRepository.save(repository);
     }
 
-    public List<GhRepository> getAllTrackedRepositories() {
-        return _ghRepositoryRepository.findAll();
+    public Page<GhRepository> getAllTrackedRepositories(Pageable pageable) {
+        return _ghRepositoryRepository.findAll(pageable);
     }
 
 }

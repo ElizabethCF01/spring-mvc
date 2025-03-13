@@ -2,12 +2,12 @@ package com.example.spring_boot.controllers;
 
 import com.example.spring_boot.models.GhRepositoryActivity;
 import com.example.spring_boot.services.GhRepositoryActivityManager;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/activities")
@@ -20,26 +20,50 @@ public class GhRepositoryActivityController {
     }
 
     @GetMapping
-    public List<GhRepositoryActivity> getRecentActivities() {
-        return activityRepositoryManager.getRecentActivities();
+    public Page<GhRepositoryActivity> getRecentActivities(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "eventDate,DESC") String sort
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepositoryManager.getRecentActivities(pageable);
     }
 
     @GetMapping("/repo/{name}")
-    public List<GhRepositoryActivity> getActivitiesByRepoName(@PathVariable String name) {
-        return activityRepositoryManager.getActivitiesByRepositoryName(name);
+    public Page<GhRepositoryActivity> getActivitiesByRepoName(
+            @PathVariable String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "eventDate,DESC") String sort)
+    {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepositoryManager.getActivitiesByRepositoryName(name, pageable);
     }
 
 
     @GetMapping("/owner/{owner}")
-    public List<GhRepositoryActivity> getActivitiesByOwner(@PathVariable String owner) {
-        return activityRepositoryManager.getActivitiesByOwner(owner);
+    public Page<GhRepositoryActivity> getActivitiesByOwner(
+            @PathVariable String owner,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "eventDate,DESC") String sort)
+    {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "eventDate"));
+
+        return activityRepositoryManager.getActivitiesByOwner(owner, pageable);
     }
 
 
     @GetMapping("/owner/{owner}/repo/{name}")
-    public List<GhRepositoryActivity> getActivitiesByOwnerAndRepo(
+    public Page<GhRepositoryActivity> getActivitiesByOwnerAndRepo(
             @PathVariable String owner,
-            @PathVariable String name) {
-        return activityRepositoryManager.getActivitiesByOwnerAndRepo(owner, name);
+            @PathVariable String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "eventDate,DESC") String sort)
+    {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepositoryManager.getActivitiesByOwnerAndRepo(owner, name, pageable);
     }
 }

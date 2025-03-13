@@ -7,7 +7,8 @@ import com.example.spring_boot.models.GhRepositoryActivity;
 import com.example.spring_boot.repositories.GhRepositoryActivityRepository;
 import com.example.spring_boot.repositories.GhRepositoryRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -90,29 +91,29 @@ public class GhRepositoryActivityManager {
         }
     }
 
-    public List<GhRepositoryActivity> getRecentActivities() {
-        return activityRepository.findAll(Sort.by(Sort.Direction.DESC, "eventDate"));
+    public Page<GhRepositoryActivity> getRecentActivities(Pageable pageable) {
+        return activityRepository.findAll(pageable);
     }
 
-    public List<GhRepositoryActivity> getActivitiesByRepositoryName(String name) {
+    public Page<GhRepositoryActivity> getActivitiesByRepositoryName(String name, Pageable pageable) {
         GhRepository repository = repositoryRepository.findByName(name)
                 .orElseThrow(() -> new GhRepositoryNotFoundException("Repository '" + name + "' not found"));
 
-        return activityRepository.findByRepositoryName(name, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepository.findByRepositoryName(name, pageable);
     }
 
-    public List<GhRepositoryActivity> getActivitiesByOwner(String owner) {
+    public Page<GhRepositoryActivity> getActivitiesByOwner(String owner, Pageable pageable) {
         if (!repositoryRepository.existsByOwner(owner)) {
             throw new GhRepositoryNotFoundException("There are no repositories from owner '" + owner + "'");
         }
-        return activityRepository.findByRepositoryOwner(owner, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepository.findByRepositoryOwner(owner, pageable);
     }
 
-    public List<GhRepositoryActivity> getActivitiesByOwnerAndRepo(String owner, String name) {
+    public Page<GhRepositoryActivity> getActivitiesByOwnerAndRepo(String owner, String name, Pageable pageable) {
         GhRepository repository = repositoryRepository.findByOwnerAndName(owner, name)
                 .orElseThrow(() -> new GhRepositoryNotFoundException("Repository '" + owner + "/" + name + "' not found"));
 
-        return activityRepository.findByRepositoryOwnerAndRepositoryName(owner, name, Sort.by(Sort.Direction.DESC, "eventDate"));
+        return activityRepository.findByRepositoryOwnerAndRepositoryName(owner, name, pageable);
     }
 }
 
