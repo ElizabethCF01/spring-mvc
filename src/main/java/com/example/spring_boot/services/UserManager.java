@@ -10,10 +10,10 @@ import java.util.List;
 
 @Service
 public class UserManager {
-    private final UserRepository _userRepository;
+    private final UserRepository userRepository;
 
     public UserManager(UserRepository userRepository) {
-        _userRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -21,14 +21,14 @@ public class UserManager {
         UserModel user = new UserModel();
         user.setEmail(userRequest.getEmail());
         user.setIpAddress(userRequest.getIpAddress());
-        _userRepository.save(user);
+        userRepository.save(user);
     }
 
     public boolean emailExists(String email) {
-        return _userRepository.existsByEmail(email);
+        return userRepository.existsByEmail(email);
     }
     public List<UserModel> getSubscribers() {
-        return _userRepository.findAll();
+        return userRepository.findAll();
     }
 
 }
