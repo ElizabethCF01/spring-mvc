@@ -17,11 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
 
-    private final UserManager _userManager;
+    private final UserManager userManager;
 
     @Autowired
     public UserController(UserManager userManager) {
-        this._userManager = userManager;
+        this.userManager = userManager;
     }
 
     @GetMapping("/")
@@ -39,7 +39,7 @@ public class UserController {
             Model model
     ) {
         // Verify if email is duplicated
-        if (_userManager.emailExists(userRequest.getEmail())) {
+        if (userManager.emailExists(userRequest.getEmail())) {
             bindingResult.rejectValue("email", "duplicate", "This email already exists");
 
             return "index";
@@ -49,7 +49,7 @@ public class UserController {
         redirectAttributes.addFlashAttribute("successMessage",
                 "¡Thank you for subscribe!");
 
-        _userManager.saveUser(userRequest);
+        userManager.saveUser(userRequest);
         return "redirect:/";
     }
 }

@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/repositories")
 public class GhRepositoryController {
 
-    private final GhRepositoryManager _ghRepositoryManager;
+    private final GhRepositoryManager ghRepositoryManager;
 
     public GhRepositoryController(GhRepositoryManager ghRepositoryManager) {
-        _ghRepositoryManager = ghRepositoryManager;
+        this.ghRepositoryManager = ghRepositoryManager;
     }
 
     @Operation(summary = "Create a repository \", description = \"Add a repository with owner and name")
     @PostMapping
     public ResponseEntity<GhRepository> registerRepository(@RequestBody @Valid GhRepositoryRequest dto) {
-        GhRepository repo = _ghRepositoryManager.addGhRepository(dto);
+        GhRepository repo = ghRepositoryManager.addGhRepository(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(repo);
     }
 
@@ -38,6 +38,6 @@ public class GhRepositoryController {
             @RequestParam(defaultValue = "10") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return _ghRepositoryManager.getAllTrackedRepositories(pageable);
+        return ghRepositoryManager.getAllTrackedRepositories(pageable);
     }
 }

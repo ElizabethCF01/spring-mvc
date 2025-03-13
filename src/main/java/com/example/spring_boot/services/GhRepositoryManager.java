@@ -16,24 +16,24 @@ import java.util.Optional;
 
 @Service
 public class GhRepositoryManager {
-    private final GhRepositoryRepository _ghRepositoryRepository;
+    private final GhRepositoryRepository ghRepositoryRepository;
 
-    private final GhClient _githubClient;
+    private final GhClient githubClient;
 
     public GhRepositoryManager(GhRepositoryRepository ghRepositoryRepository, GhClient githubClient) {
-        _ghRepositoryRepository = ghRepositoryRepository;
-        _githubClient = githubClient;
+        this.ghRepositoryRepository = ghRepositoryRepository;
+        this.githubClient = githubClient;
     }
 
     public GhRepository addGhRepository(GhRepositoryRequest dto) {
 
         try {
-            _githubClient.checkRepositoryExists(dto.getOwner(), dto.getName());
+            githubClient.checkRepositoryExists(dto.getOwner(), dto.getName());
         } catch (FeignException.NotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This repository does not exist on GitHub ");
         }
 
-        Optional<GhRepository> existingRepo = _ghRepositoryRepository.findByOwnerAndName(dto.getOwner(), dto.getName());
+        Optional<GhRepository> existingRepo = ghRepositoryRepository.findByOwnerAndName(dto.getOwner(), dto.getName());
         if (existingRepo.isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "This repository already exists");
         }
@@ -45,11 +45,11 @@ public class GhRepositoryManager {
         repository.setGithubUrl("https://github.com/" + dto.getOwner() + "/" + dto.getName());
         repository.setLastChecked(LocalDateTime.now());
 
-        return _ghRepositoryRepository.save(repository);
+        return ghRepositoryRepository.save(repository);
     }
 
     public Page<GhRepository> getAllTrackedRepositories(Pageable pageable) {
-        return _ghRepositoryRepository.findAll(pageable);
+        return ghRepositoryRepository.findAll(pageable);
     }
 
 }

@@ -20,10 +20,10 @@ import java.util.Map;
 @RequestMapping("/api")
 public class UserRestController {
 
-    private final UserManager _userManager;
+    private final UserManager userManager;
 
     public UserRestController(UserManager userManager) {
-        this._userManager = userManager;
+        this.userManager = userManager;
     }
 
     @PostMapping("/subscribe")
@@ -42,7 +42,7 @@ public class UserRestController {
         }
 
         // Verify if email is duplicated
-        if (_userManager.emailExists(userRequest.getEmail())) {
+        if (userManager.emailExists(userRequest.getEmail())) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT) // 409 Conflict
                     .body(Collections.singletonMap("error", "This email already exists"));
@@ -51,7 +51,7 @@ public class UserRestController {
         // Get clients ip
         userRequest.setIpAddress(IPAddressUtils.getClientIpAddress(request));
 
-        _userManager.saveUser(userRequest);
+        userManager.saveUser(userRequest);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED) // 201 Created
@@ -60,6 +60,6 @@ public class UserRestController {
 
     @GetMapping("/subscribers")
     public List<UserModel> getSubscribers() {
-        return _userManager.getSubscribers();
+        return userManager.getSubscribers();
     }
 }
