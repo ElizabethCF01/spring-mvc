@@ -2,7 +2,7 @@ package com.example.spring_boot.controllers;
 
 import com.example.spring_boot.dtos.UserRequest;
 import com.example.spring_boot.services.UserManager;
-import com.example.spring_boot.util.IPAddressUtils;
+import com.example.spring_boot.utils.IPAddressUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class UserController {
 
             return "index";
         }
-        // Get client ip
+        // Get clients ip
         userRequest.ipAddress = (IPAddressUtils.getClientIpAddress(request));
         redirectAttributes.addFlashAttribute("successMessage",
                 "¡Thank you for subscribe!");

@@ -1,4 +1,4 @@
-package com.example.spring_boot.scheduler;
+package com.example.spring_boot.schedulers;
 
 import com.example.spring_boot.services.GhRepositoryActivityManager;
 import org.springframework.scheduling.annotation.Scheduled;

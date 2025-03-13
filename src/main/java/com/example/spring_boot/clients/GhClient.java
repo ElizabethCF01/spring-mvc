@@ -1,4 +1,4 @@
-package com.example.spring_boot.client;
+package com.example.spring_boot.clients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.spring_boot.util;
+package com.example.spring_boot.utils;
 
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,7 +8,7 @@ public class IPAddressUtils {
     public static String getClientIpAddress(HttpServletRequest request) {
         String xForwardedForHeader = request.getHeader("X-Forwarded-For");
         if (xForwardedForHeader != null && !xForwardedForHeader.isEmpty()) {
-            // The first IP in X-Forwarded-For is the  original client IP
+            // The first IP in X-Forwarded-For is the  original clients IP
             return xForwardedForHeader.split(",")[0].trim();
         }
 

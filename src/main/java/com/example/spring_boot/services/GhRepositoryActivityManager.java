@@ -1,17 +1,14 @@
 package com.example.spring_boot.services;
 
-import com.example.spring_boot.client.GhClient;
+import com.example.spring_boot.clients.GhClient;
 import com.example.spring_boot.exeptions.GhRepositoryNotFoundException;
 import com.example.spring_boot.models.GhRepository;
 import com.example.spring_boot.models.GhRepositoryActivity;
 import com.example.spring_boot.repositories.GhRepositoryActivityRepository;
 import com.example.spring_boot.repositories.GhRepositoryRepository;
-import feign.FeignException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

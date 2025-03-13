@@ -3,7 +3,7 @@ package com.example.spring_boot.controllers;
 import com.example.spring_boot.dtos.UserRequest;
 import com.example.spring_boot.models.UserModel;
 import com.example.spring_boot.services.UserManager;
-import com.example.spring_boot.util.IPAddressUtils;
+import com.example.spring_boot.utils.IPAddressUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class UserRestController {
                     .body(Collections.singletonMap("error", "This email already exists"));
         }
 
-        // Get client ip
+        // Get clients ip
         userRequest.setIpAddress(IPAddressUtils.getClientIpAddress(request));
 
         _userManager.saveUser(userRequest);
